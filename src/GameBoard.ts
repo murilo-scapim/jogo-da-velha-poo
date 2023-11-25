@@ -3,7 +3,7 @@ export default class GameBoard {
   private _lineTwo: string[];
   private _lineThree: string[];
   private _board: Array<string>[] = [];
-  private _menssageError: string = '';
+  private _messageError: string = '';
 
   constructor() {
     this._lineOne = ['_','_','_'];
@@ -14,28 +14,27 @@ export default class GameBoard {
     this._board.push(this._lineThree);
   }
 
-  get lineOne(): string[] {
-    return this._lineOne;
-  }
-
-  get lineTwo(): string[] {
-    return this._lineTwo;
-  }
-
-  get lineThree(): string[] {
-    return this._lineThree;
-  }
-
   get board(): Array<string>[] {
     return this._board;
   }
 
   get messageError(): string {
-    return this._menssageError;
+    return this._messageError;
   }
 
   set messageError(message: string) {
-    this._menssageError = message;
+    this._messageError = message;
+  }
+
+  public printBoard() {
+    console.clear();
+    
+    this._board.forEach((line) => {
+      console.log(`${line[0]}|${line[1]}|${line[2]}`);
+    });
+
+    console.log(this.messageError);
+    this._messageError = '';
   }
 
   public setValueInBoard(value: string, y: number, x: number): boolean {
@@ -47,17 +46,6 @@ export default class GameBoard {
     }
   }
 
-  public printBoard() {
-    console.clear();
-    
-    this._board.forEach((line) => {
-      console.log(`${line[0]}|${line[1]}|${line[2]}`);
-    });
-
-    console.log(this.messageError);
-    this._menssageError = '';
-  }
-
   public printWinInBoard(player: string) {
     console.clear();
 
@@ -66,7 +54,7 @@ export default class GameBoard {
     });
 
     console.log(`Parabens ${player} VENCEU!!!`);
-    this._menssageError = '';
+    this._messageError = '';
   }
 
   public printDrawInBoard() {
@@ -77,6 +65,6 @@ export default class GameBoard {
     });
 
     console.log(`Deu velha!!!`);
-    this._menssageError = '';
+    this._messageError = '';
   }
 }
